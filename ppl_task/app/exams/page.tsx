@@ -1,12 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-import { Button } from "@/components/atoms/Button";
 import { ExamList } from "@/components/organisms/ExamList";
-import { PageHeading } from "@/components/molecules/PageHeading";
 import { AppTemplate } from "@/components/templates/AppTemplate";
 import { useAppSelector } from "@/lib/hooks";
 
@@ -27,15 +24,9 @@ export default function ExamsPage() {
 
   return (
     <AppTemplate>
-      <div className="grid gap-6">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <PageHeading eyebrow="Exam list" title="Choose an exam">
-            Select a dummy exam, answer every question, and submit to see your result instantly.
-          </PageHeading>
-          <Link href="/register">
-            <Button variant="secondary">Add user</Button>
-          </Link>
-        </div>
+      <div className="grid gap-5">
+        <p className="text-sm font-bold text-slate-900">পরীক্ষা দাও</p>
+        <h1 className="text-lg font-bold text-slate-950">কি বিষয়ের পরীক্ষা দিতে চাও?</h1>
         <ExamList exams={exams} />
       </div>
     </AppTemplate>

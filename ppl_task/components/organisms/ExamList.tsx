@@ -1,8 +1,5 @@
 import Link from "next/link";
 
-import { Badge } from "@/components/atoms/Badge";
-import { Button } from "@/components/atoms/Button";
-import { Card } from "@/components/atoms/Card";
 import type { Exam } from "@/lib/features/exam/examSlice";
 
 type ExamListProps = {
@@ -11,23 +8,18 @@ type ExamListProps = {
 
 export function ExamList({ exams }: ExamListProps) {
   return (
-    <div className="grid gap-4 md:grid-cols-2">
+    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       {exams.map((exam) => (
-        <Card className="grid gap-5 p-5" key={exam.id}>
-          <div className="flex flex-wrap gap-2">
-            <Badge tone="blue">{exam.subject}</Badge>
-            <Badge>{exam.durationMinutes} min</Badge>
-          </div>
-          <div className="grid gap-2">
-            <h2 className="text-lg font-bold text-slate-950">{exam.title}</h2>
-            <p className="text-sm leading-6 text-slate-600">
-              {exam.questions.length} questions. Submit once to see your score immediately.
-            </p>
-          </div>
-          <Link href={`/exams/${exam.id}`}>
-            <Button className="w-full">Start Exam</Button>
-          </Link>
-        </Card>
+        <Link
+          className="grid min-h-28 place-items-center rounded-2xl bg-white px-5 py-4 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+          href={`/exams/${exam.id}`}
+          key={exam.id}
+        >
+          <span className={`grid h-11 w-11 place-items-center rounded-xl text-xl font-black ${exam.accent}`}>
+            {exam.icon}
+          </span>
+          <span className="mt-3 text-sm font-bold text-slate-950">{exam.subject}</span>
+        </Link>
       ))}
     </div>
   );

@@ -8,15 +8,15 @@ type OptionChoiceProps = {
 export function OptionChoice({ checked, label, name, onChange }: OptionChoiceProps) {
   return (
     <label
-      className={`flex cursor-pointer items-center gap-3 rounded-md border p-3 text-sm transition ${
+      className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 text-sm transition ${
         checked
-          ? "border-sky-500 bg-sky-50 text-sky-950"
-          : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
+          ? "border-fuchsia-500 bg-white text-slate-950 shadow-[inset_0_-2px_0_rgba(162,0,255,0.18)]"
+          : "border-white bg-white text-slate-700 hover:border-fuchsia-200"
       }`}
     >
       <input
         checked={checked}
-        className="h-4 w-4 accent-sky-600"
+        className="h-4 w-4 accent-fuchsia-700"
         name={name}
         onChange={onChange}
         type="radio"

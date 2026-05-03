@@ -5,11 +5,11 @@ import { useEffect } from "react";
 
 import { Button } from "@/components/atoms/Button";
 import { PageHeading } from "@/components/molecules/PageHeading";
-import { ChapterSelection } from "@/components/organisms/ChapterSelection";
+import { ExamSetupPanel } from "@/components/organisms/ExamSetupPanel";
 import { AppTemplate } from "@/components/templates/AppTemplate";
 import { useAppSelector } from "@/lib/hooks";
 
-export default function ExamChapterPage() {
+export default function ExamSetupPage() {
   const router = useRouter();
   const params = useParams<{ examId: string }>();
   const currentUser = useAppSelector((state) => state.auth.currentUser);
@@ -42,7 +42,7 @@ export default function ExamChapterPage() {
 
   return (
     <AppTemplate>
-      <ChapterSelection exam={exam} />
+      <ExamSetupPanel exam={exam} />
     </AppTemplate>
   );
 }
