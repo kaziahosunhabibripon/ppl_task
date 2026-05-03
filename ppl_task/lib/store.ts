@@ -1,10 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import { baseApi } from "@/lib/api/baseApi";
+import authReducer from "@/lib/features/auth/authSlice";
+import examReducer from "@/lib/features/exam/examSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
+      auth: authReducer,
+      exam: examReducer,
       [baseApi.reducerPath]: baseApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
