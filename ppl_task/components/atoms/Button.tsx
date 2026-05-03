@@ -6,10 +6,11 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const variantClasses = {
-  primary: "bg-sky-600 text-white hover:bg-sky-700 focus-visible:outline-sky-600",
+  primary:
+    "bg-fuchsia-700 text-white hover:bg-fuchsia-800 focus-visible:outline-fuchsia-700",
   secondary:
-    "border border-slate-300 bg-white text-slate-900 hover:bg-slate-50 focus-visible:outline-slate-500",
-  ghost: "text-slate-700 hover:bg-slate-100 focus-visible:outline-slate-500",
+    "border border-slate-200 bg-white text-slate-900 hover:bg-slate-50 focus-visible:outline-fuchsia-600",
+  ghost: "text-slate-700 hover:bg-fuchsia-50 focus-visible:outline-fuchsia-600",
 };
 
 export function Button({
@@ -21,7 +22,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      className={`inline-flex min-h-11 items-center justify-center rounded-md px-4 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 ${variantClasses[variant]} ${className}`}
+      className={`inline-flex min-h-10 items-center justify-center rounded-md px-4 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 ${variantClasses[variant]} ${className}`}
       type={type}
       {...props}
     >

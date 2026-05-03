@@ -6,7 +6,7 @@ type LabelProps = LabelHTMLAttributes<HTMLLabelElement> & {
 
 export function Label({ children, className = "", ...props }: LabelProps) {
   return (
-    <label className={`text-sm font-medium text-slate-800 ${className}`} {...props}>
+    <label className={`text-xs font-medium text-slate-700 ${className}`} {...props}>
       {children}
     </label>
   );
