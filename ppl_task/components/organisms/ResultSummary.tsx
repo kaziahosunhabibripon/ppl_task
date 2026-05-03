@@ -1,8 +1,6 @@
 import Link from "next/link";
 
-import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
-import { Card } from "@/components/atoms/Card";
 import type { Exam, ExamResult } from "@/lib/features/exam/examSlice";
 
 type ResultSummaryProps = {
@@ -11,49 +9,90 @@ type ResultSummaryProps = {
 };
 
 export function ResultSummary({ exam, result }: ResultSummaryProps) {
-  const percentage = Math.round((result.score / result.total) * 100);
+  const wrong = result.total - result.score;
+  const unanswered = exam.questions.filter((question) => !result.answers[question.id]).length;
 
   return (
-    <div className="grid gap-5">
-      <Card className="grid gap-4 p-6">
-        <div className="flex flex-wrap gap-2">
-          <Badge tone={percentage >= 70 ? "green" : "blue"}>{percentage}%</Badge>
-          <Badge>{exam.title}</Badge>
-        </div>
-        <div>
-          <p className="text-sm font-semibold text-slate-600">Your score</p>
-          <p className="mt-1 text-4xl font-bold text-slate-950">
-            {result.score}/{result.total}
-          </p>
-        </div>
-        <p className="text-sm leading-6 text-slate-600">
-          Submitted on {new Date(result.submittedAt).toLocaleString()}.
-        </p>
-      </Card>
-
-      <div className="grid gap-3">
-        {exam.questions.map((question, index) => {
-          const selected = result.answers[question.id];
-          const isCorrect = selected === question.correctAnswer;
-
-          return (
-            <Card className="grid gap-2 p-4" key={question.id}>
-              <p className="text-sm font-semibold text-slate-500">Question {index + 1}</p>
-              <h2 className="font-semibold text-slate-950">{question.prompt}</h2>
-              <p className={isCorrect ? "text-sm text-emerald-700" : "text-sm text-red-700"}>
-                Your answer: {selected || "Not answered"}
-              </p>
-              {!isCorrect ? (
-                <p className="text-sm text-slate-600">Correct answer: {question.correctAnswer}</p>
-              ) : null}
-            </Card>
-          );
-        })}
+    <div className="grid gap-6">
+      <div className="grid gap-4 rounded-2xl bg-white/70 p-4 shadow-sm sm:grid-cols-2">
+        <StatTile color="bg-emerald-500" label="সঠিক উত্তর" value={`${result.score} টি`} />
+        <StatTile color="bg-rose-500" label="ভুল উত্তর" value={`${wrong} টি`} />
+        <StatTile color="bg-amber-500" label="উত্তর দেইনি" value={`${unanswered} টি`} />
+        <StatTile color="bg-sky-500" label="সময় নিয়েছ" value="০২ ঘ ০৭ মিনিট" />
       </div>
 
+      <section className="grid gap-6 rounded-2xl bg-white/60 p-5">
+        <h2 className="text-lg font-bold text-slate-950">সঠিক/ভুল উত্তর দেখে নাও</h2>
+        {exam.questions.map((question, index) => {
+          const selected = result.answers[question.id];
+
+          return (
+            <div className="grid gap-4" key={question.id}>
+              <h3 className="text-sm font-bold leading-7 text-slate-950">
+                {index + 1}. {question.prompt}
+              </h3>
+              <div className="grid gap-3 md:grid-cols-2">
+                {question.options.map((option) => {
+                  const isCorrect = option === question.correctAnswer;
+                  const isWrong = option === selected && option !== question.correctAnswer;
+
+                  return (
+                    <div
+                      className={`flex min-h-12 items-center gap-3 rounded-xl border px-4 text-sm font-medium ${
+                        isCorrect
+                          ? "border-emerald-500 bg-emerald-50 text-emerald-900"
+                          : isWrong
+                            ? "border-rose-400 bg-rose-50 text-rose-900"
+                            : "border-white bg-white text-slate-700"
+                      }`}
+                      key={option}
+                    >
+                      <span
+                        className={`grid h-5 w-5 place-items-center rounded-full border text-[10px] ${
+                          isCorrect
+                            ? "border-emerald-500 bg-emerald-500 text-white"
+                            : isWrong
+                              ? "border-rose-500 bg-rose-500 text-white"
+                              : "border-slate-300"
+                        }`}
+                      >
+                        {isCorrect ? "✓" : isWrong ? "×" : ""}
+                      </span>
+                      {option}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </section>
+
       <Link href="/exams">
-        <Button variant="secondary">Back to exams</Button>
+        <Button className="w-full sm:w-52" variant="secondary">
+          ড্যাশবোর্ডে যাও
+        </Button>
       </Link>
+    </div>
+  );
+}
+
+function StatTile({
+  color,
+  label,
+  value,
+}: {
+  color: string;
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="flex items-center gap-3 rounded-xl bg-white p-4">
+      <span className={`h-3 w-3 rounded-full ${color}`} />
+      <div>
+        <p className="text-xs font-semibold text-slate-500">{label}</p>
+        <p className="mt-1 text-lg font-black text-slate-950">{value}</p>
+      </div>
     </div>
   );
 }

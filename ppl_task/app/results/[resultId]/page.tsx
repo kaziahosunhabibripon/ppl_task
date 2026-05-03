@@ -39,10 +39,10 @@ export default function ResultPage() {
       <AppTemplate>
         <div className="grid gap-4">
           <PageHeading title="Result not found">
-            Submit an exam first, then your score will appear here.
+            আগে একটি পরীক্ষা সাবমিট কর, তারপর ফলাফল দেখা যাবে।
           </PageHeading>
           <Button onClick={() => router.push("/exams")} variant="secondary">
-            Back to exams
+            ফিরে যাও
           </Button>
         </div>
       </AppTemplate>
@@ -52,8 +52,8 @@ export default function ResultPage() {
   return (
     <AppTemplate>
       <div className="grid gap-6">
-        <PageHeading eyebrow="Result" title="Your exam score">
-          Review your score and see the correct answers immediately after submission.
+        <PageHeading eyebrow={exam.subject} title={exam.title}>
+          সঠিক, ভুল, অনুত্তরিত উত্তর এবং সমাধান একসাথে দেখে নাও।
         </PageHeading>
         <ResultSummary exam={exam} result={result} />
       </div>
