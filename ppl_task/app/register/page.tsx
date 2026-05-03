@@ -25,7 +25,17 @@ export default function RegisterPage() {
 
   return (
     <AuthTemplate>
-      <AuthForm mode="register" onSubmit={(values) => dispatch(registerUser(values))} />
+      <AuthForm
+        mode="register"
+        onSubmit={(values) =>
+          dispatch(
+            registerUser({
+              ...values,
+              id: crypto.randomUUID(),
+            }),
+          )
+        }
+      />
     </AuthTemplate>
   );
 }

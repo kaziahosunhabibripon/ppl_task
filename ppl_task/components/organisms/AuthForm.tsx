@@ -16,7 +16,6 @@ type AuthFormProps = {
 export function AuthForm({ error, mode, onSubmit }: AuthFormProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const fieldErrors = useMemo(
@@ -82,10 +81,8 @@ export function AuthForm({ error, mode, onSubmit }: AuthFormProps) {
       {isLogin ? (
         <input
           className="h-9 w-full rounded-md border border-slate-300 bg-white px-3 text-xs text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-fuchsia-500 focus:ring-2 focus:ring-fuchsia-100"
-          onChange={(event) => setPassword(event.target.value)}
           placeholder="Enter your password"
           type="password"
-          value={password}
         />
       ) : (
         <>
@@ -95,10 +92,8 @@ export function AuthForm({ error, mode, onSubmit }: AuthFormProps) {
           <FieldSelect id="version" label="Version" options={["English", "Bangla"]} />
           <input
             className="h-9 w-full rounded-md border border-slate-300 bg-white px-3 text-xs text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-fuchsia-500 focus:ring-2 focus:ring-fuchsia-100"
-            onChange={(event) => setPassword(event.target.value)}
             placeholder="Password"
             type="password"
-            value={password}
           />
           <input
             className="h-9 w-full rounded-md border border-slate-300 bg-white px-3 text-xs text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-fuchsia-500 focus:ring-2 focus:ring-fuchsia-100"

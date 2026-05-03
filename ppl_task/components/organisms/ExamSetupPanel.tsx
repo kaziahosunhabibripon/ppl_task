@@ -3,14 +3,22 @@
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/atoms/Button";
-import type { Exam } from "@/lib/features/exam/examSlice";
+import { configureSetup, startExam } from "@/lib/features/exam/examSlice";
+import type { Exam, ExamSession } from "@/lib/features/exam/examSlice";
+import { useAppDispatch } from "@/lib/hooks";
 
 type ExamSetupPanelProps = {
   exam: Exam;
+  session: ExamSession;
 };
 
-export function ExamSetupPanel({ exam }: ExamSetupPanelProps) {
+export function ExamSetupPanel({ exam, session }: ExamSetupPanelProps) {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const start = () => {
+    dispatch(startExam({ examId: exam.id, startedAt: new Date().toISOString() }));
+    router.push(`/exams/${exam.id}/take`);
+  };
 
   return (
     <div className="grid min-h-[calc(100vh-3rem)] grid-rows-[auto_1fr_auto] gap-5">
@@ -32,10 +40,38 @@ export function ExamSetupPanel({ exam }: ExamSetupPanelProps) {
           <div>
             <p className="mb-3 text-sm font-bold text-slate-900">প্রশ্নের ধরন</p>
             <div className="grid grid-cols-2 rounded-xl bg-white p-1">
-              <button className="h-11 rounded-lg bg-fuchsia-700 text-sm font-bold text-white" type="button">
+              <button
+                className={`h-11 rounded-lg text-sm font-bold ${
+                  session.questionType === "MCQ" ? "bg-fuchsia-700 text-white" : "text-slate-400"
+                }`}
+                onClick={() =>
+                  dispatch(
+                    configureSetup({
+                      examId: exam.id,
+                      questionCount: session.questionCount,
+                      questionType: "MCQ",
+                    }),
+                  )
+                }
+                type="button"
+              >
                 MCQ
               </button>
-              <button className="h-11 rounded-lg text-sm font-bold text-slate-400" type="button">
+              <button
+                className={`h-11 rounded-lg text-sm font-bold ${
+                  session.questionType === "WRITTEN" ? "bg-fuchsia-700 text-white" : "text-slate-400"
+                }`}
+                onClick={() =>
+                  dispatch(
+                    configureSetup({
+                      examId: exam.id,
+                      questionCount: session.questionCount,
+                      questionType: "WRITTEN",
+                    }),
+                  )
+                }
+                type="button"
+              >
                 WRITTEN
               </button>
             </div>
@@ -57,7 +93,7 @@ export function ExamSetupPanel({ exam }: ExamSetupPanelProps) {
       </section>
 
       <div className="-mx-4 flex justify-end border-t border-slate-200 bg-white px-4 py-4 lg:-mx-10 lg:px-10">
-        <Button className="h-12 min-h-12 w-full sm:w-64" onClick={() => router.push(`/exams/${exam.id}/take`)}>
+        <Button className="h-12 min-h-12 w-full sm:w-64" onClick={start}>
           পরীক্ষা শুরু কর →
         </Button>
       </div>

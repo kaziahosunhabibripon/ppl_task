@@ -1,7 +1,6 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 import { Button } from "@/components/atoms/Button";
 import { PageHeading } from "@/components/molecules/PageHeading";
@@ -12,7 +11,6 @@ import { useAppSelector } from "@/lib/hooks";
 export default function ResultPage() {
   const router = useRouter();
   const params = useParams<{ resultId: string }>();
-  const currentUser = useAppSelector((state) => state.auth.currentUser);
   const result = useAppSelector((state) => {
     if (params.resultId === "latest") {
       return state.exam.results.at(-1);
@@ -23,16 +21,6 @@ export default function ResultPage() {
   const exam = useAppSelector((state) =>
     result ? state.exam.exams.find((item) => item.id === result.examId) : undefined,
   );
-
-  useEffect(() => {
-    if (!currentUser) {
-      router.push("/login");
-    }
-  }, [currentUser, router]);
-
-  if (!currentUser) {
-    return null;
-  }
 
   if (!result || !exam) {
     return (

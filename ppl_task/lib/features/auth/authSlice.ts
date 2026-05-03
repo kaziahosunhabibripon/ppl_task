@@ -17,6 +17,10 @@ type AuthPayload = {
   email: string;
 };
 
+type RegisterPayload = AuthPayload & {
+  id: string;
+};
+
 const initialState: AuthState = {
   users: [],
   currentUser: null,
@@ -29,7 +33,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    registerUser: (state, action: PayloadAction<AuthPayload>) => {
+    registerUser: (state, action: PayloadAction<RegisterPayload>) => {
       const name = action.payload.name.trim();
       const email = normalizeEmail(action.payload.email);
       const existingUser = state.users.find((user) => user.email === email);
@@ -41,7 +45,7 @@ const authSlice = createSlice({
       }
 
       const user: User = {
-        id: crypto.randomUUID(),
+        id: action.payload.id,
         name,
         email,
       };

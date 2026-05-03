@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 
 import { Button } from "@/components/atoms/Button";
 import { PageHeading } from "@/components/molecules/PageHeading";
@@ -18,17 +18,14 @@ export default function ExamTakePage() {
   const exam = useAppSelector((state) =>
     state.exam.exams.find((item) => item.id === params.examId),
   );
+  const session = useAppSelector((state) =>
+    params.examId ? state.exam.sessions[params.examId] : undefined,
+  );
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showMissing, setShowMissing] = useState(false);
 
   const answeredCount = useMemo(() => Object.keys(answers).length, [answers]);
   const isComplete = exam ? answeredCount === exam.questions.length : false;
-
-  useEffect(() => {
-    if (!currentUser) {
-      router.push("/login");
-    }
-  }, [currentUser, router]);
 
   if (!currentUser) {
     return null;
@@ -54,6 +51,8 @@ export default function ExamTakePage() {
       submitExam({
         answers,
         examId: exam.id,
+        id: crypto.randomUUID(),
+        submittedAt: new Date().toISOString(),
         userId: currentUser.id,
       }),
     );
@@ -68,7 +67,8 @@ export default function ExamTakePage() {
             <div>
               <h1 className="text-lg font-bold text-slate-950">{exam.title}</h1>
               <p className="mt-2 text-xs font-semibold text-slate-500">
-                ◷ কুইজ &nbsp;&nbsp; ▣ {exam.durationMinutes} মিনিট &nbsp;&nbsp; □ {exam.questions.length} টি
+                ◷ {session?.questionType ?? "MCQ"} &nbsp;&nbsp; ▣ {exam.durationMinutes} মিনিট
+                &nbsp;&nbsp; □ {exam.questions.length} টি
               </p>
             </div>
             <Button className="h-11 min-h-11 w-32" type="submit">

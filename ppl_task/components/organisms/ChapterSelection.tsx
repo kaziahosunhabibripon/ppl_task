@@ -1,28 +1,34 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/atoms/Button";
-import type { Exam } from "@/lib/features/exam/examSlice";
+import { configureChapters } from "@/lib/features/exam/examSlice";
+import type { Exam, ExamSession } from "@/lib/features/exam/examSlice";
+import { useAppDispatch } from "@/lib/hooks";
 
 type ChapterSelectionProps = {
   exam: Exam;
+  session: ExamSession;
 };
 
-export function ChapterSelection({ exam }: ChapterSelectionProps) {
+export function ChapterSelection({ exam, session }: ChapterSelectionProps) {
   const router = useRouter();
-  const [selected, setSelected] = useState<string[]>(() => exam.chapters.slice(0, 4));
+  const dispatch = useAppDispatch();
   const columns = useMemo(() => {
     const middle = Math.ceil(exam.chapters.length / 2);
     return [exam.chapters.slice(0, middle), exam.chapters.slice(middle)];
   }, [exam.chapters]);
 
   const toggle = (chapter: string) => {
-    setSelected((current) =>
-      current.includes(chapter)
-        ? current.filter((item) => item !== chapter)
-        : [...current, chapter],
+    dispatch(
+      configureChapters({
+        examId: exam.id,
+        selectedChapters: session.selectedChapters.includes(chapter)
+          ? session.selectedChapters.filter((item) => item !== chapter)
+          : [...session.selectedChapters, chapter],
+      }),
     );
   };
 
@@ -45,7 +51,7 @@ export function ChapterSelection({ exam }: ChapterSelectionProps) {
         {columns.map((column, columnIndex) => (
           <div className="rounded-2xl bg-white/75 p-4 shadow-sm" key={columnIndex}>
             {column.map((chapter, index) => {
-              const checked = selected.includes(chapter);
+              const checked = session.selectedChapters.includes(chapter);
 
               return (
                 <button
@@ -75,7 +81,11 @@ export function ChapterSelection({ exam }: ChapterSelectionProps) {
       <div className="-mx-4 flex flex-col gap-3 border-t border-slate-200 bg-white px-4 py-4 sm:flex-row sm:items-center sm:justify-between lg:-mx-10 lg:px-10">
         <label className="grid gap-1 text-xs font-semibold text-slate-700">
           প্রশ্ন সংখ্যা
-          <input className="h-10 w-72 rounded-lg border border-slate-200 px-3 text-sm" readOnly value={12} />
+          <input
+            className="h-10 w-72 rounded-lg border border-slate-200 px-3 text-sm"
+            readOnly
+            value={session.questionCount}
+          />
         </label>
         <Button className="h-12 min-h-12 w-full sm:w-64" onClick={() => router.push(`/exams/${exam.id}/setup`)}>
           পরীক্ষা দাও

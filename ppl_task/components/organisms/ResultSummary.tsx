@@ -11,6 +11,7 @@ type ResultSummaryProps = {
 export function ResultSummary({ exam, result }: ResultSummaryProps) {
   const wrong = result.total - result.score;
   const unanswered = exam.questions.filter((question) => !result.answers[question.id]).length;
+  const duration = formatDuration(result.durationSeconds);
 
   return (
     <div className="grid gap-6">
@@ -18,7 +19,7 @@ export function ResultSummary({ exam, result }: ResultSummaryProps) {
         <StatTile color="bg-emerald-500" label="সঠিক উত্তর" value={`${result.score} টি`} />
         <StatTile color="bg-rose-500" label="ভুল উত্তর" value={`${wrong} টি`} />
         <StatTile color="bg-amber-500" label="উত্তর দেইনি" value={`${unanswered} টি`} />
-        <StatTile color="bg-sky-500" label="সময় নিয়েছ" value="০২ ঘ ০৭ মিনিট" />
+        <StatTile color="bg-sky-500" label="সময় নিয়েছ" value={duration} />
       </div>
 
       <section className="grid gap-6 rounded-2xl bg-white/60 p-5">
@@ -75,6 +76,13 @@ export function ResultSummary({ exam, result }: ResultSummaryProps) {
       </Link>
     </div>
   );
+}
+
+function formatDuration(totalSeconds: number) {
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  return `${minutes} মিনিট ${seconds} সেকেন্ড`;
 }
 
 function StatTile({

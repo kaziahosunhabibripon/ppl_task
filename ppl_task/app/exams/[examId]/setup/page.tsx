@@ -1,7 +1,6 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 import { Button } from "@/components/atoms/Button";
 import { PageHeading } from "@/components/molecules/PageHeading";
@@ -12,22 +11,14 @@ import { useAppSelector } from "@/lib/hooks";
 export default function ExamSetupPage() {
   const router = useRouter();
   const params = useParams<{ examId: string }>();
-  const currentUser = useAppSelector((state) => state.auth.currentUser);
   const exam = useAppSelector((state) =>
     state.exam.exams.find((item) => item.id === params.examId),
   );
+  const session = useAppSelector((state) =>
+    params.examId ? state.exam.sessions[params.examId] : undefined,
+  );
 
-  useEffect(() => {
-    if (!currentUser) {
-      router.push("/login");
-    }
-  }, [currentUser, router]);
-
-  if (!currentUser) {
-    return null;
-  }
-
-  if (!exam) {
+  if (!exam || !session) {
     return (
       <AppTemplate>
         <div className="grid gap-4">
@@ -42,7 +33,7 @@ export default function ExamSetupPage() {
 
   return (
     <AppTemplate>
-      <ExamSetupPanel exam={exam} />
+      <ExamSetupPanel exam={exam} session={session} />
     </AppTemplate>
   );
 }

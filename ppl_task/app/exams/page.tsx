@@ -1,26 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-
 import { ExamList } from "@/components/organisms/ExamList";
 import { AppTemplate } from "@/components/templates/AppTemplate";
 import { useAppSelector } from "@/lib/hooks";
 
 export default function ExamsPage() {
-  const router = useRouter();
-  const currentUser = useAppSelector((state) => state.auth.currentUser);
   const exams = useAppSelector((state) => state.exam.exams);
-
-  useEffect(() => {
-    if (!currentUser) {
-      router.push("/login");
-    }
-  }, [currentUser, router]);
-
-  if (!currentUser) {
-    return null;
-  }
 
   return (
     <AppTemplate>
