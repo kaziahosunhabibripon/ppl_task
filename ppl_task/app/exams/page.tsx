@@ -9,9 +9,11 @@ export default function ExamsPage() {
 
   return (
     <AppTemplate>
-      <div className="grid gap-5">
-        <p className="text-sm font-bold text-slate-900">পরীক্ষা দাও</p>
-        <h1 className="text-lg font-bold text-slate-950">কি বিষয়ের পরীক্ষা দিতে চাও?</h1>
+      <div className="grid gap-7 pt-2">
+        <div className="grid gap-8">
+          <p className="text-[18px] font-black text-slate-950">পরীক্ষা দাও</p>
+          <h1 className="text-[20px] font-black text-slate-950">কি বিষয়ের পরীক্ষা দিতে চাও ?</h1>
+        </div>
         <ExamList exams={exams} />
       </div>
     </AppTemplate>

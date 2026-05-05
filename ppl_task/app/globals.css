@@ -28,3 +28,15 @@ body {
     48px 48px,
     48px 48px;
 }
+
+.auth-grid {
+  background-color: #f1ebff;
+  background-image:
+    linear-gradient(rgba(123, 92, 190, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(123, 92, 190, 0.055) 1px, transparent 1px),
+    linear-gradient(135deg, rgba(227, 232, 255, 0.9), rgba(251, 239, 255, 0.74) 45%, rgba(224, 229, 255, 0.9));
+  background-size:
+    24px 24px,
+    24px 24px,
+    auto;
+}

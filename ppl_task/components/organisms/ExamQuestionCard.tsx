@@ -17,8 +17,8 @@ export function ExamQuestionCard({
   reviewAnswer,
 }: ExamQuestionCardProps) {
   return (
-    <section className="grid gap-4">
-      <h2 className="text-sm font-bold leading-7 text-slate-950">
+    <section className="grid gap-3">
+      <h2 className="text-[13px] font-bold leading-6 text-slate-950">
         {index + 1}. {question.prompt}
       </h2>
       <div className="grid gap-3 md:grid-cols-2">

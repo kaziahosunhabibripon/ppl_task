@@ -39,10 +39,17 @@ export default function ResultPage() {
 
   return (
     <AppTemplate>
-      <div className="grid gap-6">
-        <PageHeading eyebrow={exam.subject} title={exam.title}>
-          সঠিক, ভুল, অনুত্তরিত উত্তর এবং সমাধান একসাথে দেখে নাও।
-        </PageHeading>
+      <div className="grid gap-5 pt-2">
+        <div>
+          <h1 className="text-[15px] font-black text-slate-950">
+            মক পরীক্ষা ({exam.subject})
+          </h1>
+          <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] font-semibold text-slate-500">
+            <span>▣ ফলাফল</span>
+            <span>▣ {result.total} টি</span>
+            <span>◷ {exam.durationMinutes} মিনিট</span>
+          </p>
+        </div>
         <ResultSummary exam={exam} result={result} />
       </div>
     </AppTemplate>

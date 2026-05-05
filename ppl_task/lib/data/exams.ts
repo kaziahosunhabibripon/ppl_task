@@ -23,6 +23,7 @@ export const exams: Exam[] = [
     questions: [
       {
         id: "q1",
+        chapter: "গ্যাস",
         prompt:
           "একটি যৌগে কার্বনের শতকরা সংযোজন 46.6। এর আণবিক ভর 250। যৌগটির সংকেত কোনটি?",
         options: ["46 J", "77 J", "44 J", "78 J"],
@@ -30,18 +31,21 @@ export const exams: Exam[] = [
       },
       {
         id: "q2",
+        chapter: "রাসায়নিক বন্ধন",
         prompt: "জাতীয় সমস্যা সমাধানে ব্যবহারের জন্য নিচের কোনটি আদর্শ নমুনা?",
         options: ["অম্ল", "অ্যামোনিয়া", "বাফার", "লবণ"],
         correctAnswer: "বাফার",
       },
       {
         id: "q3",
+        chapter: "পরিবেশ রসায়ন",
         prompt: "কোনটির তাপমাত্রা সবচেয়ে বেশি?",
         options: ["সিট", "গ্লাস প্লেট", "আয়নমণ্ডল", "ইলেকট্রন"],
         correctAnswer: "আয়নমণ্ডল",
       },
       {
         id: "q4",
+        chapter: "মৌলের পর্যায়বৃত্ত ধর্ম",
         prompt:
           "একটি বস্তু 1200 K তাপমাত্রায় উত্তপ্ত করা হলো। 100 K তাপমাত্রার বস্তু অপেক্ষা কত গুণ বেশি তাপীয় শক্তি প্রদর্শন করবে?",
         options: ["80 K", "70 K", "50 K", "60 K"],
@@ -60,12 +64,14 @@ export const exams: Exam[] = [
     questions: [
       {
         id: "q1",
+        chapter: "কোষ ও টিস্যু",
         prompt: "কোষের শক্তিঘর বলা হয় কাকে?",
         options: ["রাইবোসোম", "মাইটোকন্ড্রিয়া", "নিউক্লিয়াস", "গলজি বডি"],
         correctAnswer: "মাইটোকন্ড্রিয়া",
       },
       {
         id: "q2",
+        chapter: "জিনতত্ত্ব",
         prompt: "DNA এর পূর্ণরূপ কোনটি?",
         options: [
           "ডাই অক্সি নিউক্লিক এসিড",
@@ -77,6 +83,7 @@ export const exams: Exam[] = [
       },
       {
         id: "q3",
+        chapter: "উদ্ভিদ শারীরতত্ত্ব",
         prompt: "সালোকসংশ্লেষণ কোথায় ঘটে?",
         options: ["ক্লোরোপ্লাস্ট", "নিউক্লিয়াস", "মাইটোকন্ড্রিয়া", "রাইবোসোম"],
         correctAnswer: "ক্লোরোপ্লাস্ট",
@@ -94,12 +101,14 @@ export const exams: Exam[] = [
     questions: [
       {
         id: "q1",
+        chapter: "ভেক্টর",
         prompt: "ত্বরণের একক কোনটি?",
         options: ["m/s", "m/s²", "kg", "N"],
         correctAnswer: "m/s²",
       },
       {
         id: "q2",
+        chapter: "নিউটনিয়ান বলবিদ্যা",
         prompt: "বল নির্ণয়ের সূত্র কোনটি?",
         options: ["F = ma", "E = mc", "P = VI", "v = u + at²"],
         correctAnswer: "F = ma",
@@ -117,12 +126,14 @@ export const exams: Exam[] = [
     questions: [
       {
         id: "q1",
+        chapter: "সম্ভাবনা",
         prompt: "২ + ৩ × ৪ = কত?",
         options: ["২০", "১৪", "২৪", "৯"],
         correctAnswer: "১৪",
       },
       {
         id: "q2",
+        chapter: "ত্রিকোণমিতি",
         prompt: "sin 90° এর মান কত?",
         options: ["০", "১", "২", "-১"],
         correctAnswer: "১",
@@ -140,6 +151,7 @@ export const exams: Exam[] = [
     questions: [
       {
         id: "q1",
+        chapter: "শারীরতত্ত্ব",
         prompt: "উদ্ভিদের খাদ্য তৈরির প্রক্রিয়া কোনটি?",
         options: ["শ্বসন", "সালোকসংশ্লেষণ", "পরিপাক", "রেচন"],
         correctAnswer: "সালোকসংশ্লেষণ",
@@ -157,6 +169,7 @@ export const exams: Exam[] = [
     questions: [
       {
         id: "q1",
+        chapter: "মানবদেহ",
         prompt: "মানবদেহে রক্ত পাম্প করে কোন অঙ্গ?",
         options: ["ফুসফুস", "হৃদপিণ্ড", "কিডনি", "লিভার"],
         correctAnswer: "হৃদপিণ্ড",
@@ -174,6 +187,7 @@ export const exams: Exam[] = [
     questions: [
       {
         id: "q1",
+        chapter: "ওয়েব",
         prompt: "HTML কী ধরনের ভাষা?",
         options: ["মার্কআপ", "প্রোগ্রামিং", "ডাটাবেজ", "অপারেটিং"],
         correctAnswer: "মার্কআপ",
@@ -191,6 +205,7 @@ export const exams: Exam[] = [
     questions: [
       {
         id: "q1",
+        chapter: "ব্যাকরণ",
         prompt: "সন্ধি কোন বিষয়ের অংশ?",
         options: ["ব্যাকরণ", "গদ্য", "পদ্য", "উপন্যাস"],
         correctAnswer: "ব্যাকরণ",
