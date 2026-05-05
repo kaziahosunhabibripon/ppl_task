@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
+  <title id="title">Student profile picture</title>
+  <desc id="desc">A circular illustrated student avatar.</desc>
+  <defs>
+    <linearGradient id="bg" x1="16" y1="7" x2="81" y2="91" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff7ed"/>
+      <stop offset="0.52" stop-color="#fde68a"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <clipPath id="clip">
+      <circle cx="48" cy="48" r="48"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#clip)">
+    <circle cx="48" cy="48" r="48" fill="url(#bg)"/>
+    <path d="M18 83c4.7-16.1 15.1-25.2 30-25.2S73.3 66.9 78 83v13H18V83Z" fill="#7c2d12"/>
+    <path d="M31 39c0-11.2 7.2-20 17-20s17 8.8 17 20v7.2c0 11.1-7.3 19.8-17 19.8s-17-8.7-17-19.8V39Z" fill="#fed7aa"/>
+    <path d="M28.5 40.8c1.1-15.2 8.8-24.4 20.3-24.4 9.5 0 16.6 6.2 18.6 16.1-10.9.3-19.7-2.5-26.6-8.5-1.6 6.5-5.7 11.8-12.3 16.8Z" fill="#27272a"/>
+    <path d="M33.5 46c-3.7 0-6.5-3-6.5-6.7 0-3.3 2.3-6 5.3-6.6l1.2 13.3ZM62.5 46c3.7 0 6.5-3 6.5-6.7 0-3.3-2.3-6-5.3-6.6L62.5 46Z" fill="#fed7aa"/>
+    <path d="M41 48.5c2.7 2 7.1 2 14 0" stroke="#9a3412" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/>
+    <circle cx="41" cy="40" r="2.5" fill="#1f2937"/>
+    <circle cx="55" cy="40" r="2.5" fill="#1f2937"/>
+  </g>
+</svg>
