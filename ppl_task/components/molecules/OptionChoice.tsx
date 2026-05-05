@@ -8,10 +8,10 @@ type OptionChoiceProps = {
 export function OptionChoice({ checked, label, name, onChange }: OptionChoiceProps) {
   return (
     <label
-      className={`flex min-h-10 cursor-pointer items-center gap-3 rounded-xl border px-4 py-2 text-[12px] font-medium transition ${
+      className={`flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium transition ${
         checked
-          ? "border-white bg-white text-slate-950"
-          : "border-white bg-white text-slate-700 hover:border-fuchsia-200"
+          ? "border-emerald-300 bg-white text-slate-950"
+          : "border-white bg-white text-slate-700 hover:border-slate-200"
       }`}
     >
       <input

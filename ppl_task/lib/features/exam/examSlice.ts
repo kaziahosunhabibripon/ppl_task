@@ -35,24 +35,11 @@ type SubmitExamPayload = {
 
 const createDefaultSession = (exam: Exam): ExamSession => ({
   examId: exam.id,
-  selectedChapters: exam.chapters,
+  selectedChapters: exam.chapters.slice(0, 4),
   questionCount: Math.min(12, exam.questions.length),
   questionType: "MCQ",
   startedAt: null,
 });
-
-export const getSessionQuestions = (exam: Exam, session?: ExamSession) => {
-  if (!session) {
-    return exam.questions;
-  }
-
-  const chapterQuestions = exam.questions.filter((question) =>
-    session.selectedChapters.includes(question.chapter),
-  );
-  const availableQuestions = chapterQuestions.length > 0 ? chapterQuestions : exam.questions;
-
-  return availableQuestions.slice(0, Math.min(session.questionCount, availableQuestions.length));
-};
 
 const initialState: ExamState = {
   exams,
@@ -79,17 +66,7 @@ const examSlice = createSlice({
         return;
       }
 
-      const session = getSession(state, exam);
-      const selectedChapters = action.payload.selectedChapters;
-      const availableQuestionCount = exam.questions.filter((question) =>
-        selectedChapters.includes(question.chapter),
-      ).length;
-
-      session.selectedChapters = selectedChapters;
-      session.questionCount = Math.min(
-        Math.max(1, session.questionCount),
-        Math.max(1, availableQuestionCount),
-      );
+      getSession(state, exam).selectedChapters = action.payload.selectedChapters;
     },
     configureSetup: (state, action: PayloadAction<ConfigureSetupPayload>) => {
       const exam = state.exams.find((item) => item.id === action.payload.examId);
@@ -99,14 +76,7 @@ const examSlice = createSlice({
       }
 
       const session = getSession(state, exam);
-      const availableQuestionCount = exam.questions.filter((question) =>
-        session.selectedChapters.includes(question.chapter),
-      ).length;
-
-      session.questionCount = Math.min(
-        Math.max(1, action.payload.questionCount),
-        Math.max(1, availableQuestionCount || exam.questions.length),
-      );
+      session.questionCount = Math.max(1, action.payload.questionCount);
       session.questionType = action.payload.questionType;
     },
     startExam: (state, action: PayloadAction<StartExamPayload>) => {
@@ -126,8 +96,7 @@ const examSlice = createSlice({
       }
 
       const session = getSession(state, exam);
-      const questions = getSessionQuestions(exam, session);
-      const score = questions.reduce((total, question) => {
+      const score = exam.questions.reduce((total, question) => {
         return total + (action.payload.answers[question.id] === question.correctAnswer ? 1 : 0);
       }, 0);
       const startedAt = session.startedAt
@@ -140,9 +109,8 @@ const examSlice = createSlice({
         userId: action.payload.userId,
         examId: action.payload.examId,
         answers: action.payload.answers,
-        questionIds: questions.map((question) => question.id),
         score,
-        total: questions.length,
+        total: exam.questions.length,
         submittedAt: action.payload.submittedAt,
         durationSeconds: Math.max(0, Math.round((submittedAt - startedAt) / 1000)),
       });

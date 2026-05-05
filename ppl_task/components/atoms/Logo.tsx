@@ -1,31 +1,17 @@
 import Image from "next/image";
 
-type LogoProps = {
-  size?: "sm" | "lg";
-};
-
-export function Logo({ size = "lg" }: LogoProps) {
-  const isSmall = size === "sm";
-
+export function Logo() {
   return (
-    <div className={`inline-flex items-center ${isSmall ? "gap-1.5" : "gap-2"}`}>
+    <div className="inline-flex items-center gap-1.5">
       <Image
         alt=""
-        className={isSmall ? "h-4 w-4" : "h-7 w-7"}
-        height={37}
-        priority
-        src="/Vector.svg"
-        width={37}
+        aria-hidden="true"
+        className="h-6 w-6 drop-shadow-[0_1px_3px_rgba(120,37,201,0.28)]"
+        height={30}
+        src="/Vector.png"
+        width={30}
       />
-      <span
-        className={
-          isSmall
-            ? "text-[13px] font-black leading-none tracking-normal text-slate-950"
-            : "text-[26px] font-black leading-none tracking-normal text-slate-950"
-        }
-      >
-        পাঞ্জেরী
-      </span>
+      <span className="text-[15px] font-black tracking-normal text-slate-950">পাঞ্জেরী</span>
     </div>
   );
 }

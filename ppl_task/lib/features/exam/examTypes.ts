@@ -1,6 +1,5 @@
 export type ExamQuestion = {
   id: string;
-  chapter: string;
   prompt: string;
   options: string[];
   correctAnswer: string;
@@ -30,7 +29,6 @@ export type ExamResult = {
   userId: string;
   examId: string;
   answers: Record<string, string>;
-  questionIds: string[];
   score: number;
   total: number;
   submittedAt: string;

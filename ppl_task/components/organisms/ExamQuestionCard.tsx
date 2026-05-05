@@ -1,5 +1,6 @@
 import { OptionChoice } from "@/components/molecules/OptionChoice";
 import type { ExamQuestion } from "@/lib/features/exam/examSlice";
+import { toBanglaNumber } from "@/lib/utils/banglaNumber";
 
 type ExamQuestionCardProps = {
   answer?: string;
@@ -18,10 +19,10 @@ export function ExamQuestionCard({
 }: ExamQuestionCardProps) {
   return (
     <section className="grid gap-3">
-      <h2 className="text-[13px] font-bold leading-6 text-slate-950">
-        {index + 1}. {question.prompt}
+      <h2 className="text-sm font-extrabold leading-7 text-slate-950">
+        {toBanglaNumber(index + 1)}. {question.prompt}
       </h2>
-      <div className="grid gap-3 md:grid-cols-2">
+      <div className="grid gap-2.5 md:grid-cols-2">
         {question.options.map((option) => {
           const isCorrect = reviewAnswer !== undefined && option === question.correctAnswer;
           const isWrong = reviewAnswer === option && option !== question.correctAnswer;

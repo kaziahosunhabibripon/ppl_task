@@ -8,10 +8,20 @@ type AuthTemplateProps = {
 
 export function AuthTemplate({ children }: AuthTemplateProps) {
   return (
-    <main className="auth-grid flex min-h-screen flex-1 items-start justify-center px-4 py-9">
-      <div className="grid w-full max-w-[322px] gap-4">
-        <div className="flex justify-center">
-          <Logo size="lg" />
+    <main className="app-gradient relative flex min-h-screen flex-1 justify-center overflow-y-auto px-4 pb-10 pt-16 sm:pt-20">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.24]"
+        style={{
+          backgroundImage: "url('/Content.svg')",
+          backgroundPosition: "center top",
+          backgroundRepeat: "repeat",
+          backgroundSize: "790px auto",
+        }}
+      />
+      <div className="relative w-full max-w-[308px]">
+        <div className="mb-6 flex justify-center">
+          <Logo />
         </div>
         {children}
       </div>
